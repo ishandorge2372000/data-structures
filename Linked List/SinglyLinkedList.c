@@ -162,6 +162,24 @@ void deleteAllNodes(struct node *head)
     }
 }
 
+struct node * reverseLinkedList(struct node *head)
+{
+    struct node *prev = NULL;
+    struct node *current = head;
+    struct node *nextNode = NULL;
+
+    while(current != NULL)
+    {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    head = prev;
+    return head;
+}
+
 void printList(struct node *head)
 {
     struct node *current = head;
@@ -216,6 +234,11 @@ int main()
 
     deleteAllNodes(head);
     printf("\nAll nodes deleted. List is now empty.\n");
+
+    printf("\nReversing the linked list:");
+    head = reverseLinkedList(head);
+    printList(head);
+
     return 0;
 }
 
@@ -233,4 +256,5 @@ Delete the first node from a list:10  30  20  15  25
 Delete the last node from a list:10  30  20  15  
 Delete the node at position 2 from a list:10  30  15  
 All nodes deleted. List is now empty.
+Reversing the linked list:15  30  10  
 */
