@@ -124,6 +124,32 @@ struct node * deleteLastNode(struct node *head_ref)
     return head_ref;
 }
 
+struct node * deleteNodeAtPosition(struct node *head_ref, int position)
+{
+    if(head_ref == NULL)
+    {
+        printf("List is empty. Cannot delete.\n");
+        return head_ref;
+    }
+
+    struct node *current = head_ref;
+
+    if(position == 0)
+    {
+        head_ref = current->next;
+        free(current);
+        return head_ref;
+    }
+
+    for(int i = 1; i < position - 1 ; i++, current = current->next);
+    
+    struct node *nodeToDelete = current->next;
+    current->next = nodeToDelete->next;
+    free(nodeToDelete);
+
+    return head_ref;
+}
+
 void printList(struct node *head)
 {
     struct node *current = head;
@@ -167,8 +193,13 @@ int main()
     printf("\nDelete the first node from a list:");
     head = deleteFirstNode(head);
     printList(head);
+    
     printf("\nDelete the last node from a list:");
     head = deleteLastNode(head);
+    printList(head);
+
+    printf("\nDelete the node at position 2 from a list:");
+    head = deleteNodeAtPosition(head, 2);
     printList(head);
     return 0;
 }
