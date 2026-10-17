@@ -232,12 +232,12 @@ int main()
     head = deleteNodeAtPosition(head, 2);
     printList(head);
 
-    deleteAllNodes(head);
-    printf("\nAll nodes deleted. List is now empty.\n");
-
     printf("\nReversing the linked list:");
     head = reverseLinkedList(head);
     printList(head);
+
+    deleteAllNodes(head);
+    printf("\nAll nodes deleted. List is now empty.\n");
 
     return 0;
 }
@@ -254,7 +254,7 @@ Inserting 30 at position 3 of the list.
 1  10  30  20  15  25  
 Delete the first node from a list:10  30  20  15  25  
 Delete the last node from a list:10  30  20  15  
-Delete the node at position 2 from a list:10  30  15  
+Delete the node at position 2 from a list:10  20  15
+Reversing the linked list:15  20  10
 All nodes deleted. List is now empty.
-Reversing the linked list:15  30  10  
 */
