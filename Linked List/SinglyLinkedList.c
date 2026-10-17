@@ -98,6 +98,32 @@ struct node * deleteFirstNode(struct node *head_ref)
     return head_ref;
 }
 
+struct node * deleteLastNode(struct node *head_ref)
+{
+    if(head_ref == NULL)
+    {
+        printf("List is empty. Cannot delete.\n");
+        return head_ref;
+    }
+
+    if(head_ref->next == NULL)
+    {
+        free(head_ref);
+        return NULL;
+    }
+
+    struct node *current = head_ref;
+    while(current->next->next != NULL)
+    {
+        current = current->next;
+    }
+
+    free(current->next);
+    current->next = NULL;
+
+    return head_ref;
+}
+
 void printList(struct node *head)
 {
     struct node *current = head;
@@ -140,6 +166,23 @@ int main()
 
     printf("\nDelete the first node from a list:");
     head = deleteFirstNode(head);
-    printList(haed);
+    printList(head);
+    printf("\nDelete the last node from a list:");
+    head = deleteLastNode(head);
+    printList(head);
     return 0;
 }
+
+/*  
+Output:
+10  20  15  
+Number of nodes: 3
+Inserting 25 at the end of the list.
+10  20  15  25  
+Inserting 1 at the beginning of the list.
+1  10  20  15  25  
+Inserting 30 at position 3 of the list.
+1  10  30  20  15  25  
+Delete the first node from a list:10  30  20  15  25  
+Delete the last node from a list:10  30  20  15  
+*/
