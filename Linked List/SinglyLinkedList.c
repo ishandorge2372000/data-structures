@@ -150,6 +150,18 @@ struct node * deleteNodeAtPosition(struct node *head_ref, int position)
     return head_ref;
 }
 
+void deleteAllNodes(struct node *head)
+{
+    struct node *current = head;
+
+    while(head != NULL)
+    {
+        head = head->next;
+        free(current);
+        current = head;
+    }
+}
+
 void printList(struct node *head)
 {
     struct node *current = head;
@@ -201,6 +213,9 @@ int main()
     printf("\nDelete the node at position 2 from a list:");
     head = deleteNodeAtPosition(head, 2);
     printList(head);
+
+    deleteAllNodes(head);
+    printf("\nAll nodes deleted. List is now empty.\n");
     return 0;
 }
 
@@ -216,4 +231,6 @@ Inserting 30 at position 3 of the list.
 1  10  30  20  15  25  
 Delete the first node from a list:10  30  20  15  25  
 Delete the last node from a list:10  30  20  15  
+Delete the node at position 2 from a list:10  30  15  
+All nodes deleted. List is now empty.
 */
