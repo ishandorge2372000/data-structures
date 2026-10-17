@@ -20,7 +20,7 @@ int countNodes(struct node *head)
     return count;
 }
 
-struct node *insertAtBeginning(struct node *head_ref, int new_data)
+struct node * insertAtBeginning(struct node *head_ref, int new_data)
 {
     struct node *new_node = (struct node *)malloc(sizeof(struct node));
     new_node->data = new_data;
@@ -29,7 +29,7 @@ struct node *insertAtBeginning(struct node *head_ref, int new_data)
     return head_ref;
 }
 
-void insertAtEnd(struct node *head_ref, int new_data)
+struct node * insertAtEnd(struct node *head_ref, int new_data)
 {
     struct node *new_node = (struct node *)malloc(sizeof(struct node));
     struct node *last = head_ref;
@@ -40,7 +40,7 @@ void insertAtEnd(struct node *head_ref, int new_data)
     if(head_ref == NULL)
     {
         head_ref = new_node;
-        return;
+        return head_ref;
     }
 
     while(last->next != NULL)
@@ -49,6 +49,39 @@ void insertAtEnd(struct node *head_ref, int new_data)
     }
 
     last->next = new_node;
+    return head_ref;
+}
+
+struct node * insertAtPosition(struct node *head_ref, int new_data, int position)
+{
+    struct node *new_node = (struct node *)malloc(sizeof(struct node));
+    struct node *current = head_ref;
+
+    new_node->data = new_data;
+    new_node->next = NULL;
+
+    if(position == 0)
+    {
+        new_node->next = head_ref;
+        head_ref = new_node;
+        return head_ref;
+    }
+
+    for(int i = 1; current != NULL && i < position - 1; i++)
+    {
+        current = current->next;
+    }
+
+    if(current == NULL)
+    {
+        printf("Position is greater than the number of nodes. Inserting at the end.\n");
+        return insertAtEnd(head_ref, new_data);
+    }
+
+    new_node->next = current->next;
+    current->next = new_node;
+
+    return head_ref;
 }
 
 void printList(struct node *head)
@@ -80,11 +113,15 @@ int main()
     printList(head);
     printf("\nNumber of nodes: %d\n", countNodes(head));
     printf("Inserting 25 at the end of the list.\n");
-    insertAtEnd(head, 25);
+    head = insertAtEnd(head, 25);
     printList(head);
 
     printf("\nInserting 1 at the beginning of the list.\n");
     head = insertAtBeginning(head, 1);
+    printList(head);
+
+    printf("\nInserting 30 at position 3 of the list.\n");
+    head = insertAtPosition(head, 30, 3);
     printList(head);
     return 0;
 }
