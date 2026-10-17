@@ -84,6 +84,20 @@ struct node * insertAtPosition(struct node *head_ref, int new_data, int position
     return head_ref;
 }
 
+struct node * deleteFirstNode(struct node *head_ref)
+{
+    if(head_ref == NULL)
+    {
+        printf("List is empty. Cannot delete.\n");
+        return head_ref;
+    }
+
+    struct node *firstNode = head_ref;
+    head_ref = head_ref->next;
+    free(firstNode);
+    return head_ref;
+}
+
 void printList(struct node *head)
 {
     struct node *current = head;
@@ -123,5 +137,9 @@ int main()
     printf("\nInserting 30 at position 3 of the list.\n");
     head = insertAtPosition(head, 30, 3);
     printList(head);
+
+    printf("\nDelete the first node from a list:");
+    head = deleteFirstNode(head);
+    printList(haed);
     return 0;
 }
