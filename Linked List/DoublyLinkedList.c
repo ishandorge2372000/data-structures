@@ -20,5 +20,9 @@ int main()
     printf("\nInserting 25 at position 3:\n");
     head = insertAtPosition(head, 25, 3);
     printList(head);
+
+    printf("\nDeleting node at position 2:\n");
+    head = deleteAtPosition(head, 1);
+    printList(head);
     return 0;
 }

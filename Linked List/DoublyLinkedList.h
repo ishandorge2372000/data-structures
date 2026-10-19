@@ -84,6 +84,38 @@ struct node *insertAtPosition(struct node *head, int data, int position)
     return head;
 }
 
+struct node *deleteAtPosition(struct node *head, int position)
+{
+    if (head == NULL || position < 0)
+        return head;
+
+    struct node *current = head;
+
+    if (position == 0)
+    {
+        head = current->next;
+        if (head != NULL)
+            head->prev = NULL;
+        free(current);
+        return head;
+    }
+
+    for (int i = 1; current != NULL && i < position; i++)
+        current = current->next;
+
+    if (current == NULL)
+        return head;
+
+    if (current->next != NULL)
+        current->next->prev = current->prev;
+
+    if (current->prev != NULL)
+        current->prev->next = current->next;
+
+    free(current);
+    return head;
+}
+
 void printList(struct node *head)
 {
     struct node *current = head;
