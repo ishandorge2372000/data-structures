@@ -18,6 +18,29 @@ struct node * insertAtBeginning(struct node *head, int data)
     return head; // New head of the list
 }
 
+struct node * insertAtEnd(struct node *head, int data)
+{
+    struct node *newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (head == NULL) 
+    {
+        newNode->prev = NULL;
+        head = newNode; // New head of the list
+        return head;
+    }
+
+    struct node *last = head;
+    while (last->next != NULL)
+        last = last->next;
+
+    last->next = newNode;
+    newNode->prev = last;
+
+    return head; // Head remains unchanged
+}
+
 void printList(struct node *head)
 {
     struct node *current = head;

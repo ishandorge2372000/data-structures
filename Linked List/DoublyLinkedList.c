@@ -9,6 +9,7 @@ int main()
     head->prev = NULL;
     head->next = NULL;
     head = insertAtBeginning(head, 10);
+    head = insertAtEnd(head, 30);
     printList(head);
     return 0;
 }
