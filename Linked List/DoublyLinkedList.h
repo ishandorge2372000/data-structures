@@ -14,8 +14,8 @@ struct node * insertAtBeginning(struct node *head, int data)
 
     if (head != NULL)
         head->prev = newNode;
-    head = newNode; // Update head to point to the new node
-    return head; // New head of the list
+    head = newNode;
+    return head;
 }
 
 struct node * insertAtEnd(struct node *head, int data)
@@ -27,7 +27,7 @@ struct node * insertAtEnd(struct node *head, int data)
     if (head == NULL) 
     {
         newNode->prev = NULL;
-        head = newNode; // New head of the list
+        head = newNode;
         return head;
     }
 
@@ -38,7 +38,50 @@ struct node * insertAtEnd(struct node *head, int data)
     last->next = newNode;
     newNode->prev = last;
 
-    return head; // Head remains unchanged
+    return head;
+}
+
+struct node *insertAtPosition(struct node *head, int data, int position)
+{
+    if (position < 0)
+        return head;
+
+    struct node *newNode = malloc(sizeof(struct node));
+    if (newNode == NULL)
+        return head;
+
+    newNode->data = data;
+
+    if (position == 0)
+    {
+        newNode->prev = NULL;
+        newNode->next = head;
+
+        if (head != NULL)
+            head->prev = newNode;
+        head = newNode;
+        return head;
+    }
+
+    struct node *current = head;
+
+    for (int i = 0; current != NULL && i < position - 1; i++)
+        current = current->next;
+
+    if (current == NULL)
+    {
+        free(newNode);
+        return head;
+    }
+
+    newNode->next = current->next;
+    newNode->prev = current;
+
+    if (current->next != NULL)
+        current->next->prev = newNode;
+
+    current->next = newNode;
+    return head;
 }
 
 void printList(struct node *head)
