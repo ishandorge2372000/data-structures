@@ -65,7 +65,7 @@ struct node *insertAtPosition(struct node *head, int data, int position)
 
     struct node *current = head;
 
-    for (int i = 0; current != NULL && i < position - 1; i++)
+    for (int i = 1; current != NULL && i < position - 1; i++)
         current = current->next;
 
     if (current == NULL)
