@@ -90,14 +90,12 @@ struct node *deleteAtPosition(struct node *head, int position)
         return head;
 
     struct node *current = head;
-
-    if (position == 0)
-    {
-        head = current->next;
-        if (head != NULL)
-            head->prev = NULL;
+    if(position == 1) 
+    { 
+        head = current->next; 
         free(current);
-        return head;
+        head->prev = NULL; 
+        return head; 
     }
 
     for (int i = 1; current != NULL && i < position; i++)

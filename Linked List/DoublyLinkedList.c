@@ -21,8 +21,20 @@ int main()
     head = insertAtPosition(head, 25, 3);
     printList(head);
 
-    printf("\nDeleting node at position 2:\n");
+    printf("\nDeleting node at position 1:\n");
     head = deleteAtPosition(head, 1);
+    printList(head);
+
+    printf("\nDeleting node at position 2:\n");
+    head = deleteAtPosition(head, 2);
+    printList(head);
+
+    printf("\nDeleting node at position 3:\n");
+    head = deleteAtPosition(head, 3);
+    printList(head);
+
+    printf("\nDeleting node at position 4:\n");
+    head = deleteAtPosition(head, 4);
     printList(head);
     return 0;
 }
