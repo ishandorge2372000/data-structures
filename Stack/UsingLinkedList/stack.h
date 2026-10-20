@@ -1,7 +1,7 @@
 struct node {
     int data;
     struct node* next;
-} *top = NULL;
+};
 
 struct node *push(struct node *head, int data)
 {
