@@ -36,3 +36,13 @@ struct node *peek(struct node *head)
     }
     return head;
 }
+
+void *showStack(struct node *head)
+{
+    struct node *current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
